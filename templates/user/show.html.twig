@@ -3,9 +3,12 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
+<div align="center">
+    <div class="card card-default p-3 w-75 mt-5">
+        {% if app.user and app.user.roles[0]=="ROLE_ADMIN" %}
     <h1>User</h1>
 
-    <table class="table">
+    <table class="table table-striped">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -25,10 +28,11 @@
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('user_index') }}">back to list</a>
-
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-
+    
     {{ include('user/_delete_form.html.twig') }}
+
+    {% endif %}
+    <a align="left" href="{{ path('user_index') }}" class="fs-4 text-decoration-none"><i class="fas fa-angle-double-left"></i> Back to list</a>
+    </div>
+</div>
 {% endblock %}

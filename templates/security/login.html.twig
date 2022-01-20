@@ -4,25 +4,33 @@
 
 {% block body %}
 <form method="post">
+<div align="center">
+    <div class="card card-default p-3 w-50 mt-5">
     {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            You are logged in as {{ app.user.getUserIdentifier() }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    <h1 class="mb-3">Please Login</h1>
+    <label for="inputEmail" style="text-align:left;">Email</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Entrez l'email..." autocomplete="email" required autofocus>
+    <label for="inputPassword" class="text-start mt-3">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder="Entrez le mot de passe..." required>
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
+
+    <div class="checkbox mb-3 text-start mt-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -36,7 +44,9 @@
     #}
 
     <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+        Login
     </button>
+    </div>
+</div>
 </form>
 {% endblock %}

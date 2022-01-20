@@ -1,4 +1,19 @@
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    
+        <th>Nom et prénom</th>
+        <tr>{{ form_row(form.nom_prenom) }}</tr>
+    
+        <th>Sexe</th>
+        <tr>{{ form_row(form.sexe) }}</tr>
+        
+        <th>Date de naissance</th>
+        <tr>{{ form_row(form.date_de_naissance) }}</tr>
+        
+        <th>Nationalité</th>
+        <tr>{{ form_row(form.nationalite) }}</tr>
+      
+    
+    <button class="btn btn-primary"><i class="fas fa-edit"></i> {{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+

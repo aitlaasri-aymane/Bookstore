@@ -3,16 +3,20 @@
 {% block title %}Livre index{% endblock %}
 
 {% block body %}
+<div align="center">
+    <div class="card text-white bg-dark p-3 mt-5" style="width:90%;">
     <h1>Livre index</h1>
 
-    <table class="table">
+    <table class="table table-dark table-striped">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>#</th>
                 <th>Isbn</th>
                 <th>Titre</th>
-                <th>Nombre_pages</th>
-                <th>Date_de_parution</th>
+                <th>Auteurs</th>
+                <th>Genres</th>
+                <th>Nombre de pages</th>
+                <th>Date de parution</th>
                 <th>Note</th>
                 <th>actions</th>
             </tr>
@@ -23,12 +27,28 @@
                 <td>{{ livre.id }}</td>
                 <td>{{ livre.isbn }}</td>
                 <td>{{ livre.titre }}</td>
+                <td>
+                    <ul>
+                        {% for auteur in livre.auteurs%}
+                            <li>{{ auteur }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        {% for genre in livre.genres%}
+                            <li>{{ genre }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
                 <td>{{ livre.nombrePages }}</td>
                 <td>{{ livre.dateDeParution ? livre.dateDeParution|date('Y-m-d') : '' }}</td>
-                <td>{{ livre.note }}</td>
+                <td>{{ livre.note }}/20</td>
                 <td>
-                    <a href="{{ path('livre_show', {'id': livre.id}) }}">show</a>
-                    <a href="{{ path('livre_edit', {'id': livre.id}) }}">edit</a>
+                    <a style="width : 90px; height :38px;" class="btn btn-primary me-1" href="{{ path('livre_show', {'id': livre.id}) }}" role="button"><i class="fas fa-eye"></i> Show</a>
+                    {% if app.user and app.user.roles[0]=="ROLE_ADMIN"  %}
+                    <a style="width : 80px; height :38px;" class="btn btn-warning" href="{{ path('livre_edit', {'id': livre.id}) }}" role="button"><i class="fas fa-edit"></i> Edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -39,5 +59,11 @@
         </tbody>
     </table>
 
-    <a href="{{ path('livre_new') }}">Create new</a>
+    {% if app.user and app.user.roles[0]=="ROLE_ADMIN"  %}
+    <div class="d-flex justify-content-center align-items-center">
+    <a style="width : 150px; height :38px;" class="btn btn-primary" href="{{ path('livre_new') }}" role="button"><i class="fas fa-plus-square"></i> Create new</a>
+    </div>
+    {% endif %}
+    </div>
+</div>
 {% endblock %}

@@ -1,4 +1,25 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+        <th class="text-start">Titre du livre</th>
+        <tr>{{ form_row(form.titre) }}</tr>
+    
+        <th>ISBN</th>
+        <tr>{{ form_row(form.isbn) }}</tr>
+        
+        <th>Nombre de pages</th>
+        <tr>{{ form_row(form.nombre_pages) }}</tr>
+        
+        <th>Date de parution</th>
+        <tr>{{ form_row(form.date_de_parution) }}</tr>
+
+        <th>Note</th>
+        <tr>{{ form_row(form.note) }}</tr>
+
+        <th>Auteurs</th>
+        <tr>{{ form_row(form.auteurs) }}</tr>
+
+        <th>Genres</th>
+        <tr>{{ form_row(form.genres) }}</tr>
+
+    <button class="btn btn-primary"><i class="fas fa-edit"></i> {{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

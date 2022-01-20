@@ -3,11 +3,16 @@
 {% block title %}Edit Genre{% endblock %}
 
 {% block body %}
+<div align="center">
+    <div class="card card-default p-3 w-50 mt-5">
+    {% if app.user and app.user.roles[0]=="ROLE_ADMIN" %}
     <h1>Edit Genre</h1>
 
     {{ include('genre/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('genre_index') }}">back to list</a>
-
     {{ include('genre/_delete_form.html.twig') }}
+    {% endif %}
+
+    <a align="left" href="{{ path('genre_index') }}" class="fs-4 text-decoration-none"><i class="fas fa-angle-double-left"></i> Back to list</a>
+    </div>
+</div>
 {% endblock %}
