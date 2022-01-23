@@ -29,6 +29,16 @@
                 <th>Nationalite</th>
                 <td>{{ auteur.nationalite }}</td>
             </tr>
+            <tr>
+                <th>Livres</th>
+                <td>
+                    <ul>
+                        {% for livre in auteur.livres %}
+                            <li>{{ livre }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
         </tbody>
     </table>
 
